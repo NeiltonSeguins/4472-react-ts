@@ -5,24 +5,10 @@ import InputText from "../InputText";
 import Button from "../Button";
 import { FaSearch } from "react-icons/fa";
 import MovieList from "../MovieList";
-import { Movie } from "../../types";
-import { getMovies } from "../../api";
+import useFetchMovies from "../../hooks/useFetchMovies";
 
 const MovieSection = () => {
-  const [movies, setMovies] = useState<Movie[]>([]);
-
-  const fetchMovies = async () => {
-    try {
-      const movies = await getMovies();
-      setMovies(movies);
-    } catch (err) {
-      console.error("Erro ao buscar filmes" + err);
-    }
-  };
-
-  useEffect(() => {
-    fetchMovies();
-  });
+  const { movies, error, isLoading } = useFetchMovies();
 
   return (
     <main>
